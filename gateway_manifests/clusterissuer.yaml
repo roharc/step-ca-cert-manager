@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  annotations:
+  name: acme-pki-demo
+spec:
+  acme:
+    caBundle: ###
+    privateKeySecretRef:
+      name: acme-account-key
+    server: https://pki-demo.home.arpa/acme/acme/directory
+    solvers:
+    - http01:
+        gatewayHTTPRoute:
+          parentRefs:
+          - group: gateway.networking.k8s.io
+            kind: Gateway
+            name: nginx
+            namespace: nginx-gateway

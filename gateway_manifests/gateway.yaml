@@ -1,0 +1,32 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: nginx
+  namespace: nginx-gateway
+  annotations:
+    cert-manager.io/cluster-issuer: acme-pki-demo
+spec:
+  gatewayClassName: nginx
+  listeners:
+  - name: http
+    protocol: HTTP
+    port: 80
+    allowedRoutes:
+        namespaces:
+          from: All
+  - port: 443
+    name: https
+    protocol: HTTPS
+    hostname: nginx.k3s-demo.home.arpa
+    allowedRoutes:
+      namespaces:
+        from: Selector
+        selector: 
+          matchLabels:
+            gateway-access: "true"
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        group: ""
+        name: nginx-k3s-demo-home-arpa 

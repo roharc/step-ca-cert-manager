@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: acme-pki-demo
+    cert-manager.io/common-name: nginx.k3s-demo.home.arpa
+  name: nginx
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: nginx.k3s-demo.home.arpa
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx
+            port:
+              number: 8088
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - nginx.k3s-demo.home.arpa
+    secretName: nginx-k3s-demo-home-arpa
