@@ -1,4 +1,8 @@
 # How To: setup step CA and integrate into kubernetes with cert-manager  
+
+> :exclamation: This is a How-To for demo purpose only. It summarizes the basic steps to set up an acme provider with step-ca and integrate this into kubernetes with cert-manager.
+
+
 ## 1. Setup CA and ACME provider with step CA  
 
 #### Download and install packages  
