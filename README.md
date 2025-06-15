@@ -142,8 +142,8 @@ sudo step ca certificate k3s-demo.home.arpa k3s-demo.crt k3s-demo.key --acme htt
 
 #### apply manifests
 ```
-k apply -f cert-manager-demo/application_manifests/nginx-pod.yaml
-k apply -f cert-manager-demo/application_manifests/nginx-service.yaml
+k apply -f ~/step-ca-cert-manager/application_manifests/nginx-pod.yaml
+k apply -f ~/step-ca-cert-manager/application_manifests/nginx-service.yaml
 ```
 
 #### retrieve CLUSTER-IP 
@@ -210,13 +210,13 @@ base64 ca_bundle.crt | tr -d "\n"
 then edit manifest and apply file:
 
 ```
-k apply -f cert-manager-demo/ingress_manifests/clusterissuer.yaml
+k apply -f ~/step-ca-cert-manager/ingress_manifests/clusterissuer.yaml
 ```
 ```
 k get clusterissuer
 ```
 ```
-k apply -f cert-manager-demo/ingress_manifests/ingress.yaml
+k apply -f ~/step-ca-cert-manager/ingress_manifests/ingress.yaml
 ```
 ```
 k get ingress nginx
@@ -283,9 +283,9 @@ helm install ngf oci://ghcr.io/nginx/charts/nginx-gateway-fabric --create-namesp
 gateway-access: "true"
 ```
 
-first edit `cert-manager-demo/gateway_manifests/clusterissuer.yaml` and insert `.spec.acme.caBundle` value with the output of `base64 ca_bundle.crt | tr -d "\n"`
+first edit `~/step-ca-cert-manager/gateway_manifests/clusterissuer.yaml` and insert `.spec.acme.caBundle` value with the output of `base64 ca_bundle.crt | tr -d "\n"`
 
 
 ```
-k apply -f  cert-manager-demo/gateway_manifests/
+k apply -f  ~/step-ca-cert-manager/gateway_manifests/
 ```
