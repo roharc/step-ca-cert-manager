@@ -36,7 +36,7 @@ sudo setcap CAP_NET_BIND_SERVICE=+eip $(which step-ca)
 step ca init
 ```
 
-```code no-copy
+```
 ✔ Deployment Type: Standalone
 What would you like to name your new PKI?
 ✔ (e.g. Smallstep): pki-demo
